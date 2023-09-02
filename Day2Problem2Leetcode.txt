@@ -1,0 +1,27 @@
+//496. Next Greater Element I
+//Link  -->  https://leetcode.com/problems/next-greater-element-i/
+
+
+import java.util.*;
+
+class Solution {
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        int n = nums1.length;
+        int[] ans = new int[n];
+        Map<Integer, Integer> nextGreaterMap = new HashMap<>();
+        Stack<Integer> stack = new Stack<>();
+        
+        for (int num : nums2) {
+            while (!stack.isEmpty() && num > stack.peek()) {
+                nextGreaterMap.put(stack.pop(), num);
+            }
+            stack.push(num);
+        }
+        
+        for (int i = 0; i < n; i++) {
+            ans[i] = nextGreaterMap.getOrDefault(nums1[i], -1);
+        }
+        
+        return ans;
+    }
+}
