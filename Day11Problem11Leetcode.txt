@@ -1,0 +1,32 @@
+//42. Trapping Rain Water
+//Link -->https://leetcode.com/problems/trapping-rain-water/
+
+class Solution {
+    public int trap(int[] height) {
+        int n=height.length;
+        int [] left= new int[n];
+        int [] right=new int[n];
+        int [] minArr=new int[n];
+        int sum=0;
+        int max=0;
+        for(int i=0;i<n;i++){
+            max=Math.max(height[i],max);
+            left[i]=max;
+        }
+        max=0;
+        for(int i=n-1;i>=0;i--){
+            max=Math.max(height[i],max);
+            right[i]=max;
+        }
+        int min=0;
+        for(int i=0;i<n;i++){
+            min=Math.min(left[i],right[i]);
+            minArr[i]=min;
+            sum+=(minArr[i]-height[i]);
+        }
+        // for(int i=0;i<n;i++){
+        //      sum+=(minArr[i]-height[i]);
+        // }
+        return sum;
+    }
+}
