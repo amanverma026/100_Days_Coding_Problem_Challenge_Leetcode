@@ -1,0 +1,32 @@
+// 71. Simplify Path
+//Link--> https://leetcode.com/problems/simplify-path/description/
+
+class Solution {
+    public String simplifyPath(String path) {
+        Stack<String> stack = new Stack<>();
+        String[] splitString= path.split("/");
+        for(String dir:splitString){
+            if(dir.equals(".")|| dir.equals("")){
+                 continue;
+            }
+            else if(dir.equals("..")){
+                if(!stack.isEmpty()){
+                    stack.pop();
+                }
+            }
+            else{ 
+                stack.push(dir);
+            }
+        }
+        while(stack.isEmpty()){
+            return "/";
+        }
+        String ans="";
+        while(!stack.isEmpty()){
+            ans=stack.peek() + ans;
+            ans="/" + ans;
+            stack.pop();
+        }
+        return ans;
+    }
+}
